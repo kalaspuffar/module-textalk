@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" xmlns:px="http://www.daisy.org/ns/pipeline">
+
+    <!-- Pipeline 2 scripts -->
+    <uri name="http://www.daisy.org/pipeline/modules/module-textalk/hello-world.xpl" uri="../xml/xproc/hello-world.xpl" px:content-type="script" px:id="module-textalk-hello-world"/>
+
+</catalog>
