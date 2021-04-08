@@ -2,7 +2,6 @@ package com.textalk;
 
 import com.xmlcalabash.core.XProcException;
 import com.xmlcalabash.core.XProcRuntime;
-import com.xmlcalabash.core.XProcStep;
 import com.xmlcalabash.io.ReadablePipe;
 import com.xmlcalabash.io.WritablePipe;
 import com.xmlcalabash.library.DefaultStep;
@@ -11,6 +10,7 @@ import com.xmlcalabash.runtime.XAtomicStep;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.Serializer;
+import org.daisy.common.xproc.calabash.XProcStep;
 import org.daisy.common.xproc.calabash.XProcStepProvider;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.annotations.Component;
