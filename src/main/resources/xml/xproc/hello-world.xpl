@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step" xmlns:px="http://www.daisy.org/ns/pipeline/xproc" xmlns:d="http://www.daisy.org/ns/pipeline/data"
-                type="px:module-textalk-hello-world" name="main" version="1.0" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:l="http://xproc.org/library" xmlns:dtbook="http://www.daisy.org/z3986/2005/dtbook/"
-                xmlns:html="http://www.w3.org/1999/xhtml" xmlns:cx="http://xmlcalabash.com/ns/extensions" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:textalk="http://textalk.com/p/textalk/">
+                type="px:module-textalk-hello-world" name="main" version="1.0" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:pxp="http://exproc.org/proposed/steps" xmlns:html="http://www.w3.org/1999/xhtml"
+                xmlns:cx="http://xmlcalabash.com/ns/extensions" xmlns:textalk="http://textalk.com/p/textalk/">
 
     <p:documentation xmlns="http://www.w3.org/1999/xhtml">
         <h1 px:role="name">Textalk hello world</h1>
@@ -9,10 +9,13 @@
     </p:documentation>
 
     <p:output port="validation-status" px:media-type="application/vnd.pipeline.status+xml">
-        <p:documentation xmlns="http://www.w3.org/1999/xhtml">
+<!--
+        <p:docmentation xmlns="http://www.w3.org/1999/xhtml">
             <h1 px:role="name">Validation status</h1>
             <p px:role="desc">Validation status (http://code.google.com/p/daisy-pipeline/wiki/ValidationStatusXML).</p>
-        </p:documentation>
+        </p:docmentation>
+-->
+        <p:pipe port="status.out" step="hello-world.do-greeting"/>
     </p:output>
 
     <p:option name="html-report" required="true" px:output="result" px:type="anyDirURI" px:media-type="application/vnd.pipeline.report+xml">
@@ -58,7 +61,9 @@
 
     <textalk:hello-world name="hello-world.do-greeting">
         <p:input port="source">
-            <p:pipe step="html" port="result"/>
+            <p:inline>
+                <doc>Hello world!</doc>
+            </p:inline>
         </p:input>
         <p:with-option name="html" select="$html"/>
         <p:with-option name="greeting" select="$greeting"/>
@@ -66,16 +71,10 @@
 
     <p:choose name="hello-world.report">
         <p:xpath-context>
-            <p:pipe port="validation-status" step="hello-world.do-greeting"/>
+            <p:pipe port="status.out" step="hello-world.do-greeting"/>
         </p:xpath-context>
         <p:when test="/*/@result='ok'">
-            <p:output port="fileset.out" primary="true">
-                <p:empty/>
-            </p:output>
-            <p:output port="in-memory.out" sequence="true">
-                <p:empty/>
-            </p:output>
-            <p:output port="report.out" sequence="true">
+            <p:output port="report.out" sequence="true" primary="true">
                 <p:pipe port="report" step="hello-world.do-greeting"/>
             </p:output>
 
@@ -86,13 +85,7 @@
             </p:sink>
         </p:when>
         <p:otherwise>
-            <p:output port="fileset.out" sequence="true" primary="true">
-                <p:empty/>
-            </p:output>
-            <p:output port="in-memory.out" sequence="true">
-                <p:empty/>
-            </p:output>
-            <p:output port="report.out" sequence="true">
+            <p:output port="report.out" sequence="true" primary="true">
                 <p:pipe port="report" step="hello-world.do-greeting"/>
             </p:output>
 
