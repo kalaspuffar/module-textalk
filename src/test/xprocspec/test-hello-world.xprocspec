@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.daisy.org/ns/xprocspec/xprocspec.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<x:description xmlns:x="http://www.daisy.org/ns/xprocspec" script="../../main/resources/xml/xproc/hello-world.xpl" xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"
+    xmlns:px="http://www.daisy.org/ns/pipeline/xproc" xmlns:d="http://www.daisy.org/ns/pipeline/data" xmlns:epub="http://www.idpf.org/2007/ops" xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:opf="http://www.idpf.org/2007/opf">
+
+    <x:scenario label="px:module-textalk-hello-world - Test">
+        <x:call step="px:module-textalk-hello-world">
+            <x:option name="html" select="resolve-uri('.',base-uri())"/>
+            <x:option name="html-report" select="resolve-uri('.',base-uri())"/>
+            <x:option name="greeting" select="'World'"/>
+        </x:call>
+
+        <x:expect type="compare" label="The document should contain greeting">
+            <x:document type="inline">
+                Hello World
+            </x:document>
+        </x:expect>
+    </x:scenario>
+
+</x:description>
