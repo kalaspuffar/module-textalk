@@ -37,6 +37,7 @@
     </p:option>
 
     <p:import href="library.xpl"/>
+    <!--
     <p:import href="http://www.daisy.org/pipeline/modules/file-utils/library.xpl"/>
     <p:import href="http://www.daisy.org/pipeline/modules/html-utils/library.xpl"/>
     <p:import href="http://www.daisy.org/pipeline/modules/fileset-utils/library.xpl"/>
@@ -49,11 +50,11 @@
     <px:normalize-uri name="html-report">
         <p:with-option name="href" select="resolve-uri($html-report,static-base-uri())"/>
     </px:normalize-uri>
-
     <px:message message="Link: $1">
         <p:with-option name="param1" select="$html"/>
     </px:message>
     <p:sink/>
+    -->
 
     <textalk:hello-world name="hello-world.do-greeting">
         <p:input port="source">
